@@ -4,15 +4,17 @@ class NewItem extends React.Component {
   state = {
     newTaskText: ""
   }
-  updateTaskText = (event) => {
+
+  updateTaskText = event => {
     this.setState({
       newTaskText: event.target.value
     });
   }
-  handleClick = (e) => {
+
+  handleClick = e => {
     e.preventDefault();
     if(this.state.newTaskText === ""){
-      alert("Please add a task first");
+      alert("You need a task first!");
     }else{
       this.props.addTaskFunc(this.state.newTaskText);
       this.setState({

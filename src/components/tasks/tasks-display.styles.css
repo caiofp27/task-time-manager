@@ -50,3 +50,11 @@
   bottom: 20px;
   right: 50px;
 }
+
+.edit-icon{
+  margin: 4px;
+  position: absolute;
+  bottom: 20px;
+  right: 130px;
+  
+}

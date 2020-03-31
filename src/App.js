@@ -7,39 +7,12 @@ import { v4 as uuidv4 } from 'uuid';
 class App extends React.Component {
   state = {
     tasks: [
-      {
-        id: uuidv4(),
-        taskText: "make dinner", 
-        completed: true,
-        isOn: false,
-        startedDate: "2020-03-27T16:13:31.682Z",
-        startedDateMs: 1585325700968,
-        timeTotal: 100000,
-      },
-      {
-        id: uuidv4(),
-        taskText: "walk the dog", 
-        completed: true,
-        isOn: false, 
-        startedDate: "2020-01-27T16:13:31.682Z",
-        startedDateMs: 1585325700910,
-        timeTotal: 3112000
-      },
-      {
-        id: uuidv4(),
-        taskText: "do the dishes", 
-        completed: false,
-        isOn: false, 
-        startedDate: "2020-03-27T16:13:31.682Z",
-        startedDateMs: 1585325700968,
-        timeTotal: 1215412
-      }
+      {id: uuidv4(), taskText: "make dinner", completed: true, isOn: false, startedDate: "2020-03-27T16:13:31.682Z", startedDateMs: 1585325700968, timeTotal: 100000},
+      {id: uuidv4(), taskText: "walk the dog", completed: true, isOn: false, startedDate: "2020-01-27T16:13:31.682Z", startedDateMs: 1585325700910, timeTotal: 3112000},
+      {id: uuidv4(), taskText: "do the dishes", completed: false, isOn: false, startedDate: "2020-03-27T16:13:31.682Z",   startedDateMs: 1585325700968, timeTotal: 1215412}
     ],
     incrementer: [
-      {
-       id: null,
-       func: null 
-      }
+      {id: null, func: null}
     ]
   }
 
@@ -104,7 +77,7 @@ class App extends React.Component {
   }
 
   handleStartTimer = id => {
-    const incre = {
+    const incrementer = {
       id: id,
       func: setInterval(() => {
         const running = this.state.tasks.map(task => {
@@ -120,7 +93,7 @@ class App extends React.Component {
       },1000)
     };
     const incrementerCopy = this.state.incrementer.slice();
-    incrementerCopy.push(incre);
+    incrementerCopy.push(incrementer);
     this.setState({
       incrementer: incrementerCopy
     })
@@ -146,23 +119,48 @@ class App extends React.Component {
     });
   }
 
+  editTask = (id, taskText) => {
+    const taskCopy = this.state.tasks.map(item => {
+      if(item.id === id){
+        item.taskText =  taskText;
+      }
+      return item;
+    });
+    this.setState({
+      tasks: taskCopy
+    })
+  }
+
+  msToTime = duration => {
+    let seconds = Math.floor((duration / 1000) % 60),
+        minutes = Math.floor((duration / (1000 * 60)) % 60),
+        hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
+    hours = (hours < 10) ? "0" + hours : hours;
+    minutes = (minutes < 10) ? "0" + minutes : minutes;
+    seconds = (seconds < 10) ? "0" + seconds : seconds;
+    return hours+":"+minutes+":"+seconds;
+  }
+
   render() {
-    const completedTasks = this.state.tasks.filter(t => t.completed === true);
-    const incompleteTasks = this.state.tasks.filter(t => t.completed === false);
+    const completedTasks = this.state.tasks.filter(t => t.completed === true),
+          incompleteTasks = this.state.tasks.filter(t => t.completed === false);
+    let sumHours = 0;
+    completedTasks.map(item => sumHours += item.timeTotal);
     return (
       <section>
-        <h3 className="title">My ToDo List</h3>
+        <h1 className="title">Tasks</h1>
         <NewTask addTaskFunc={this.addTask} />
         <section className="container">
           <div className="row">
             {incompleteTasks.map(item => {
-            return <TasksDisp key={item.id} text={item.taskText} stop={item.stop} isOn={item.isOn} totalTime={item.timeTotal} date={item.startedDate} completed={item.completed} deleteTaskFunc={this.deleteTask} checkTaskFunc={this.checkTask} undoTaskFunc={this.undoTask} startTimerFunc={this.handleStartTimer} pauseTimerFunc={this.handlePauseTimer} id={item.id} />})}
+            return <TasksDisp key={item.id} text={item.taskText} isOn={item.isOn} totalTime={item.timeTotal} completed={item.completed} deleteTaskFunc={this.deleteTask} checkTaskFunc={this.checkTask} undoTaskFunc={this.undoTask} startTimerFunc={this.handleStartTimer} pauseTimerFunc={this.handlePauseTimer} editTaskFunc={this.editTask} msToTimeFunc={this.msToTime} id={item.id} />})}
           </div>
         </section>
         <section className="container">
-          <div className="row">
+        <h2>Tempo Trabalhado: {this.msToTime(sumHours)}</h2>
+          <div className='row'>
             {completedTasks.map(item => {
-            return <TasksDisp key={item.id} text={item.taskText} stop={item.stop} isOn={item.isOn} totalTime={item.timeTotal} date={item.startedDate} completed={item.completed} deleteTaskFunc={this.deleteTask} checkTaskFunc={this.checkTask} undoTaskFunc={this.undoTask} startTimerFunc={this.handleStartTimer} pauseTimerFunc={this.handlePauseTimer} id={item.id} />})}
+            return <TasksDisp key={item.id} text={item.taskText} isOn={item.isOn} totalTime={item.timeTotal} completed={item.completed} deleteTaskFunc={this.deleteTask} checkTaskFunc={this.checkTask} undoTaskFunc={this.undoTask} startTimerFunc={this.handleStartTimer} pauseTimerFunc={this.handlePauseTimer} msToTimeFunc={this.msToTime} id={item.id} />})}
           </div>
         </section>
       </section>

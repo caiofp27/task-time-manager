@@ -4,54 +4,63 @@ import './tasks-display.styles.css';
 
 class TasksDisp extends React.Component {
   handleDelete = e => {
+    e.preventDefault();
     this.props.deleteTaskFunc(this.props.id);
   }
 
   handleCheck = e => {
+    e.preventDefault();
     this.props.checkTaskFunc(this.props.id);
   }
 
   handleUndo = e => {
+    e.preventDefault();
     this.props.undoTaskFunc(this.props.id);
   }
 
   startTimer = e => {
+    e.preventDefault();
     this.props.startTimerFunc(this.props.id);
   }
 
   pauseTimer = e => {
+    e.preventDefault();
     this.props.pauseTimerFunc(this.props.id);
   }
-  
-  msToTime(duration) {
-    let seconds = Math.floor((duration / 1000) % 60),
-        minutes = Math.floor((duration / (1000 * 60)) % 60),
-        hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
-    hours = (hours < 10) ? "0" + hours : hours;
-    minutes = (minutes < 10) ? "0" + minutes : minutes;
-    seconds = (seconds < 10) ? "0" + seconds : seconds;
-    return "Tempo gasto: "+hours+":"+minutes+":"+seconds;
+
+  editTask = e => {
+    e.preventDefault();
+    let taskText = prompt("Edit Task");
+    if(taskText !== null && taskText.length > 0) {
+      this.props.editTaskFunc(this.props.id, taskText);
+    } else {
+      taskText = prompt("Cannot be blank!");
+      this.props.editTaskFunc(this.props.id, taskText);
+    }
   }
 
   render() {
-    let time = this.msToTime(this.props.totalTime),
-        button = '';
+    let time = this.props.msToTimeFunc(this.props.totalTime),
+        iconsStartPause = '',
+        iconEdit = '';
     if(!this.props.completed && !this.props.isOn) {
-     button = <i className='fas fa-play play-icon' onClick={this.startTimer} />
+      iconsStartPause = <i className='fas fa-play play-icon' onClick={this.startTimer} />;
+      iconEdit =  <i className='fas fa-edit edit-icon' onClick={this.editTask} />;
     } else if(!this.props.completed && this.props.isOn) {
-      button = <i className='fas fa-pause pause-icon' onClick={this.pauseTimer} />
+      iconsStartPause = <i className='fas fa-pause pause-icon' onClick={this.pauseTimer} />;
+      iconEdit =  <i className='fas fa-edit edit-icon' onClick={this.editTask} />;
     }
     return (
       <div className={`col-md-3 card box ${this.props.completed ? "completed-box" : "incompleted-box"}`}>
         <div className="card-text">
           <p>{this.props.text}</p>
-          <p>{time}</p>
+          <p>Tempo: {time}</p>
           {
             this.props.completed ? 
             <i className="fas fa-undo undo-icon" onClick={this.handleUndo} /> : 
-            <i className='check-icon fas fa-check' onClick={this.handleCheck} /> 
+            <i className="check-icon fas fa-check" onClick={this.handleCheck} />
           }
-          {button}
+          {iconsStartPause}{iconEdit}
           <i className="fas fa-trash-alt trash-icon" onClick={this.handleDelete} />
         </div>
       </div>
