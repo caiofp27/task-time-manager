@@ -34,8 +34,7 @@ class TasksDisp extends React.Component {
     if(taskText !== null && taskText.length > 0) {
       this.props.editTaskFunc(this.props.id, taskText);
     } else {
-      taskText = prompt("Cannot be blank!");
-      this.props.editTaskFunc(this.props.id, taskText);
+      alert('Cannot be blank!');
     }
   }
 
@@ -51,15 +50,15 @@ class TasksDisp extends React.Component {
       iconEdit =  <i className='fas fa-edit edit-icon' onClick={this.editTask} />;
     }
     return (
-      <div className={`col-md-3 card box ${this.props.completed ? "completed-box" : "incompleted-box"}`}>
+      <div className={`col-lg-3 col-md-4 col-sm-6 box ${this.props.completed ? "completed-box" : "incompleted-box"}`}>
         <div className="card-text">
           <p>{this.props.text}</p>
-          <p>Tempo: {time}</p>
-          {
-            this.props.completed ? 
+          <div className='divider' />
+          {this.props.completed ? 
             <i className="fas fa-undo undo-icon" onClick={this.handleUndo} /> : 
             <i className="check-icon fas fa-check" onClick={this.handleCheck} />
           }
+          <p className='time'>{time}</p>
           {iconsStartPause}{iconEdit}
           <i className="fas fa-trash-alt trash-icon" onClick={this.handleDelete} />
         </div>

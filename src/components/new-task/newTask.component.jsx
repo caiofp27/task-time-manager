@@ -1,4 +1,5 @@
 import React from "react";
+import './newTask.styles.css';
 
 class NewItem extends React.Component {
   state = {
@@ -30,12 +31,12 @@ class NewItem extends React.Component {
           <input 
             type="text" 
             className="col-6 form-control mr-2" 
-            placeholder="New task"
+            placeholder="NEW TASK"
             value={this.state.newTaskText}
             onChange={this.updateTaskText}
             maxLength="70"
           />
-          <button className="btn btn-sm btn-primary" onClick={this.handleClick}>
+          <button className="btn btn-sm btn-primary button-custom" onClick={this.handleClick}>
             ADD
           </button>
         </form>

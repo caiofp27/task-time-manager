@@ -4,6 +4,25 @@
   font-style: italic;
 }
 
+.row-container{
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.row-box{
+  justify-content: center;
+}
+
+.title-completed{
+  text-align: center;
+}
+
+@media only screen and (max-width: 992px){
+  .time{
+    right: 70px;
+  }
+}
+
 @media only screen and (max-width: 720px){
   h3{
       font-size: 18px;
@@ -16,5 +35,8 @@
   }
   a{
       font-size: 11px;
+  }
+  .button-custom{
+    height: 32.5px;
   }
 }

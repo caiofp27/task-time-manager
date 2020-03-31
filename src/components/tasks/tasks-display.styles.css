@@ -1,13 +1,39 @@
 .card-text{
-  padding-top: 20px;
   padding-bottom: 30px;
+  word-wrap: break-word;
 }
 .box{
-  margin: 3px;
+  display: flex;
+  align-items: center;
+  margin: 10px;
+  border-radius: 5px;
+  padding: 25px;
+  cursor: pointer;
+  transform: translateZ(0);
+  transition: transform 0.25s ease-out;
+  box-shadow: 0 0px 1px 0 rgba(0, 0, 0, 0.2), 0 3px 6px 0 rgba(0, 0, 0, 0.19);
+  min-height: 180px;
+}
+
+.box:hover{
+  transform: scale(1.02);
+}
+
+.divider{
+  height: 1px;
+  position: absolute;
+  bottom: 55px;
+  left: 2px;
+  width: 98%;
+  background-color: #eee;
+}
+
+.completed-box .divider{
+  background-color: #cccccc ;
 }
 
 .completed-box{
-  background-color: #afe86d;
+  background-color: #eee;
 }
 
 .incompleted-box{
@@ -16,45 +42,49 @@
 
 .trash-icon{
   margin: 4px;
-  color: red;
   position: absolute;
   right: 10px;
-  bottom: 20px;
+  bottom: 15px;
 }
+
 .check-icon{
   margin: 4px;
-  color: blue;
   position: absolute;
   left: 10px;
-  bottom: 20px;
+  bottom: 15px;
 }
 
 .undo-icon{
   margin: 4px;
-  color: green;
   position: absolute;
   left: 10px;
-  bottom: 20px;
+  bottom: 15px;
 }
 
 .play-icon{
   margin: 4px;
   position: absolute;
-  bottom: 20px;
-  left: 50px;
+  left: 70px;
+  bottom: 15px;
 }
 
 .pause-icon{
-  margin: 4px;
+  padding: 4px;
   position: absolute;
-  bottom: 20px;
-  right: 50px;
+  right: 40px;
+  bottom: 15px;
 }
 
 .edit-icon{
   margin: 4px;
   position: absolute;
-  bottom: 20px;
-  right: 130px;
-  
+  left: 40px;
+  bottom: 15px;
+}
+
+.time{
+  margin: 0px;
+  position: absolute;
+  right: 85px;
+  bottom: 15px;
 }

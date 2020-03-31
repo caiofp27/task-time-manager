@@ -7,9 +7,9 @@ import { v4 as uuidv4 } from 'uuid';
 class App extends React.Component {
   state = {
     tasks: [
-      {id: uuidv4(), taskText: "make dinner", completed: true, isOn: false, startedDate: "2020-03-27T16:13:31.682Z", startedDateMs: 1585325700968, timeTotal: 100000},
-      {id: uuidv4(), taskText: "walk the dog", completed: true, isOn: false, startedDate: "2020-01-27T16:13:31.682Z", startedDateMs: 1585325700910, timeTotal: 3112000},
-      {id: uuidv4(), taskText: "do the dishes", completed: false, isOn: false, startedDate: "2020-03-27T16:13:31.682Z",   startedDateMs: 1585325700968, timeTotal: 1215412}
+      {id: uuidv4(), taskText: "Make dinner", completed: true, isOn: false, startedDate: "2020-03-27T16:13:31.682Z", startedDateMs: 1585325700968, timeTotal: 100000},
+      {id: uuidv4(), taskText: "Walk the dog", completed: true, isOn: false, startedDate: "2020-01-27T16:13:31.682Z", startedDateMs: 1585325700910, timeTotal: 3112000},
+      {id: uuidv4(), taskText: "Do the dishes", completed: false, isOn: false, startedDate: "2020-03-27T16:13:31.682Z",   startedDateMs: 1585325700968, timeTotal: 1215412}
     ],
     incrementer: [
       {id: null, func: null}
@@ -148,21 +148,50 @@ class App extends React.Component {
     completedTasks.map(item => sumHours += item.timeTotal);
     return (
       <section>
-        <h1 className="title">Tasks</h1>
-        <NewTask addTaskFunc={this.addTask} />
-        <section className="container">
-          <div className="row">
-            {incompleteTasks.map(item => {
-            return <TasksDisp key={item.id} text={item.taskText} isOn={item.isOn} totalTime={item.timeTotal} completed={item.completed} deleteTaskFunc={this.deleteTask} checkTaskFunc={this.checkTask} undoTaskFunc={this.undoTask} startTimerFunc={this.handleStartTimer} pauseTimerFunc={this.handlePauseTimer} editTaskFunc={this.editTask} msToTimeFunc={this.msToTime} id={item.id} />})}
-          </div>
-        </section>
-        <section className="container">
-        <h2>Tempo Trabalhado: {this.msToTime(sumHours)}</h2>
-          <div className='row'>
-            {completedTasks.map(item => {
-            return <TasksDisp key={item.id} text={item.taskText} isOn={item.isOn} totalTime={item.timeTotal} completed={item.completed} deleteTaskFunc={this.deleteTask} checkTaskFunc={this.checkTask} undoTaskFunc={this.undoTask} startTimerFunc={this.handleStartTimer} pauseTimerFunc={this.handlePauseTimer} msToTimeFunc={this.msToTime} id={item.id} />})}
-          </div>
-        </section>
+        <div className="container">
+          <h1 className="title">Todo List</h1>
+          <NewTask addTaskFunc={this.addTask} />
+          <section className="row-container">
+            <div className="row row-box">
+              {incompleteTasks.map(item => {
+              return <TasksDisp 
+                key={item.id} 
+                text={item.taskText} 
+                isOn={item.isOn} 
+                totalTime={item.timeTotal} 
+                completed={item.completed} 
+                deleteTaskFunc={this.deleteTask} 
+                checkTaskFunc={this.checkTask} 
+                undoTaskFunc={this.undoTask} 
+                startTimerFunc={this.handleStartTimer} 
+                pauseTimerFunc={this.handlePauseTimer} 
+                editTaskFunc={this.editTask} 
+                msToTimeFunc={this.msToTime} 
+                id={item.id} 
+              />})}
+            </div>
+          </section>
+          <section className="row-container">
+          <h3 className='title-completed'>TIME WORKED: {this.msToTime(sumHours)}</h3>
+            <div className='row row-box'>
+              {completedTasks.map(item => {
+              return <TasksDisp 
+                key={item.id} 
+                text={item.taskText} 
+                isOn={item.isOn} 
+                totalTime={item.timeTotal} 
+                completed={item.completed} 
+                deleteTaskFunc={this.deleteTask} 
+                checkTaskFunc={this.checkTask} 
+                undoTaskFunc={this.undoTask} 
+                startTimerFunc={this.handleStartTimer} 
+                pauseTimerFunc={this.handlePauseTimer} 
+                msToTimeFunc={this.msToTime} 
+                id={item.id} 
+              />})}
+            </div>
+          </section>
+        </div>
       </section>
     );
   }
