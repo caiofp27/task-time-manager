@@ -36,9 +36,9 @@ class TasksDisp extends React.Component {
   render() {
     let time = this.msToTime(this.props.totalTime),
         button = '';
-    if(!this.props.stop && !this.props.isOn) {
+    if(!this.props.completed && !this.props.isOn) {
      button = <i className='fas fa-play play-icon' onClick={this.startTimer} />
-    } else if(!this.props.stop && this.props.isOn) {
+    } else if(!this.props.completed && this.props.isOn) {
       button = <i className='fas fa-pause pause-icon' onClick={this.pauseTimer} />
     }
     return (

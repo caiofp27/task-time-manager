@@ -12,7 +12,6 @@ class App extends React.Component {
         taskText: "make dinner", 
         completed: true,
         isOn: false,
-        stop: true, 
         startedDate: "2020-03-27T16:13:31.682Z",
         startedDateMs: 1585325700968,
         timeTotal: 100000,
@@ -21,8 +20,7 @@ class App extends React.Component {
         id: uuidv4(),
         taskText: "walk the dog", 
         completed: true,
-        isOn: false,
-        stop: true, 
+        isOn: false, 
         startedDate: "2020-01-27T16:13:31.682Z",
         startedDateMs: 1585325700910,
         timeTotal: 3112000
@@ -31,11 +29,16 @@ class App extends React.Component {
         id: uuidv4(),
         taskText: "do the dishes", 
         completed: false,
-        isOn: false,
-        stop: false,  
+        isOn: false, 
         startedDate: "2020-03-27T16:13:31.682Z",
         startedDateMs: 1585325700968,
         timeTotal: 1215412
+      }
+    ],
+    incrementer: [
+      {
+       id: null,
+       func: null 
       }
     ]
   }
@@ -48,7 +51,6 @@ class App extends React.Component {
       taskText: taskText,
       completed: false,
       isOn: false,
-      stop: false,  
       startedDate: date,
       startedDateMs: timeMs,
       timeTotal: 0
@@ -69,25 +71,29 @@ class App extends React.Component {
     });
   }
   checkTask = id => {
+    const incrementerCopy = this.state.incrementer.filter(item => item.id !== id);
+    this.state.incrementer.map(item => {
+      if(item.id === id){
+        clearInterval(item.func);
+      }
+      return item;
+    })
     const checkTask = this.state.tasks.map(task => {
       if(task.id === id){
-        clearInterval(this.incrementer);
         task.completed = true;
-        task.stop = true;
         task.isOn = false;
       }
       return task;
     });
     this.setState({
-      tasks: checkTask
+      tasks: checkTask,
+      incrementer: incrementerCopy
     });
   }
   undoTask = id => {
     const undoTask = this.state.tasks.map(task => {
       if(task.id === id){
-        clearInterval(this.incrementer);
         task.completed = false;
-        task.stop = false;
         task.isOn = false;
       }
       return task;
@@ -98,30 +104,45 @@ class App extends React.Component {
   }
 
   handleStartTimer = id => {
-    this.incrementer = setInterval(() => {
-      let running = this.state.tasks.map(task => {
-        if(task.id === id) {
-          task.isOn = true;
-          task.timeTotal += 1000;
-        } 
-          return task;
-        });
-        this.setState({
-          tasks: running
-        });  
-    },1000);
+    const incre = {
+      id: id,
+      func: setInterval(() => {
+        const running = this.state.tasks.map(task => {
+          if(task.id === id) {
+            task.isOn = true;
+            task.timeTotal += 1000;
+          } 
+            return task;
+          });
+          this.setState({
+            tasks: running
+          });  
+      },1000)
+    };
+    const incrementerCopy = this.state.incrementer.slice();
+    incrementerCopy.push(incre);
+    this.setState({
+      incrementer: incrementerCopy
+    })
   }
 
   handlePauseTimer = id => {
-    clearInterval(this.incrementer);
-    let pause = this.state.tasks.map(task => {
+    const incrementerCopy = this.state.incrementer.filter(item => item.id !== id);
+    this.state.incrementer.map(item => {
+      if(item.id === id){
+        clearInterval(item.func);
+      }
+      return item;
+    })
+    const pause = this.state.tasks.map(task => {
       if(task.id === id) {
         task.isOn = false;
       }
       return task;
     });
     this.setState({
-      tasks: pause
+      tasks: pause,
+      incrementer: incrementerCopy
     });
   }
 
