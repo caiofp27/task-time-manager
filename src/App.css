@@ -1,42 +1,93 @@
-.title{
-  text-align: center;
-  margin: 30px;
-  font-style: italic;
+.header-background {
+  background: linear-gradient(to bottom, rgba(51, 51, 51, .1) 0%, rgba(51, 51, 51, .3) 59%, rgba(51, 51, 51, .5) 100%), url('./images/header.jpeg') no-repeat;
+  background-size: cover;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 80px;
 }
 
-.row-container{
+.title-background {
+  width: 300px;
+  height: 100px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.row-container {
   margin-top: 30px;
   margin-bottom: 30px;
 }
 
-.row-box{
+.row-box {
   justify-content: center;
 }
 
-.title-completed{
+.title-completed {
   text-align: center;
 }
 
-@media only screen and (max-width: 992px){
-  .time{
-    right: 70px;
-  }
+.divider-body {
+  height: 1px;
+  width: 100%;
+  background-color: #eee;
 }
 
-@media only screen and (max-width: 720px){
-  h3{
-      font-size: 18px;
+.title-container {
+  position: relative;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.hours {
+  position: absolute;
+  bottom: 0;
+  right: 20px;
+}
+
+@media only screen and (max-width: 992px) {
+  .time {
+    right: 70px;
   }
-  h4{
-      font-size: 14px;
+
+}
+
+@media only screen and (max-width: 720px) {
+  h1 {
+    font-size: 25px;
   }
-  .form-control, p{
+
+  h3 {
+    font-size: 18px;
+    text-align: left!important;
+  }
+
+  .hours {
+    right: 10px;
+  }
+
+  .header-background {
+    height: 150px;
+    margin-bottom: 50px;
+  }
+
+  .title-background {
+    width: 200px;
+    height: 70px;
+  }
+
+  .form-control, p {
       font-size: 13px;
   }
-  a{
-      font-size: 11px;
-  }
-  .button-custom{
+  
+  .button-custom {
     height: 32.5px;
   }
 }

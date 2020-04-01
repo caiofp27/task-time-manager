@@ -30,7 +30,7 @@ class TasksDisp extends React.Component {
 
   editTask = e => {
     e.preventDefault();
-    let taskText = prompt("Edit Task");
+    let taskText = prompt("Edit your task");
     if(taskText !== null && taskText.length > 0) {
       this.props.editTaskFunc(this.props.id, taskText);
     } else {
@@ -49,7 +49,7 @@ class TasksDisp extends React.Component {
       iconsStartPause = <i className='fas fa-pause pause-icon' onClick={this.pauseTimer} />;
       iconEdit =  <i className='fas fa-edit edit-icon' onClick={this.editTask} />;
     }
-    return (
+    return(
       <div className={`col-lg-3 col-md-4 col-sm-6 box ${this.props.completed ? "completed-box" : "incompleted-box"}`}>
         <div className="card-text">
           <p>{this.props.text}</p>

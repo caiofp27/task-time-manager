@@ -1,8 +1,9 @@
-.card-text{
+.card-text {
   padding-bottom: 30px;
-  word-wrap: break-word;
+  word-break: break-all;
 }
-.box{
+
+.box {
   display: flex;
   align-items: center;
   margin: 10px;
@@ -15,74 +16,98 @@
   min-height: 180px;
 }
 
-.box:hover{
+.box:hover {
   transform: scale(1.02);
 }
 
-.divider{
+.divider {
   height: 1px;
   position: absolute;
   bottom: 55px;
   left: 2px;
   width: 98%;
-  background-color: #eee;
+  background-color: #80444444;
 }
 
-.completed-box .divider{
+.completed-box .divider {
   background-color: #cccccc ;
 }
 
-.completed-box{
-  background-color: #eee;
+.completed-box {
+  background-color: #fcf4c7;
 }
 
-.incompleted-box{
+.incompleted-box {
   background-color: white;
 }
 
-.trash-icon{
+.trash-icon {
   margin: 4px;
   position: absolute;
   right: 10px;
   bottom: 15px;
 }
 
-.check-icon{
+.trash-icon:hover {
+  color: #bda102;
+}
+
+.check-icon {
   margin: 4px;
   position: absolute;
   left: 10px;
   bottom: 15px;
 }
 
-.undo-icon{
+.check-icon:hover {
+  color: #bda102;
+}
+
+.undo-icon {
   margin: 4px;
   position: absolute;
   left: 10px;
   bottom: 15px;
 }
 
-.play-icon{
+.undo-icon:hover {
+  color: #bda102;
+}
+
+.play-icon {
   margin: 4px;
   position: absolute;
   left: 70px;
   bottom: 15px;
 }
 
-.pause-icon{
+.play-icon:hover {
+  color: #bda102;
+}
+
+.pause-icon {
   padding: 4px;
   position: absolute;
   right: 40px;
   bottom: 15px;
 }
 
-.edit-icon{
+.pause-icon:hover {
+  color: #bda102;
+}
+
+.edit-icon {
   margin: 4px;
   position: absolute;
   left: 40px;
   bottom: 15px;
 }
 
-.time{
+.edit-icon:hover {
+  color: #bda102;
+}
+
+.time {
   margin: 0px;
   position: absolute;
   right: 85px;

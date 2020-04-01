@@ -1,13 +1,21 @@
-.form-control{
+.form-control {
   border: 1px solid #eee;
 }
 
-.form-control:focus{
+.form-control:focus {
   box-shadow: 0 0 5px rgba(204, 204, 204, 0.5);
   border-color: #ccc;
 }
 
-.button-custom{
+.button-custom {
+  background-color: #ebc802;
   height: 37px;
   width: 75px;
+  border: none;
+  color: black;
+}
+
+.button-custom:hover, .button-custom:active {
+  background-color: #bda102;
+  color: white;
 }

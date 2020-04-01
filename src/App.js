@@ -146,10 +146,14 @@ class App extends React.Component {
           incompleteTasks = this.state.tasks.filter(t => t.completed === false);
     let sumHours = 0;
     completedTasks.map(item => sumHours += item.timeTotal);
-    return (
+    return(
       <section>
+        <div className="header-background">
+          <div className="title-background">
+            <h1 className="title">Todo List</h1>
+          </div>
+        </div>
         <div className="container">
-          <h1 className="title">Todo List</h1>
           <NewTask addTaskFunc={this.addTask} />
           <section className="row-container">
             <div className="row row-box">
@@ -171,8 +175,12 @@ class App extends React.Component {
               />})}
             </div>
           </section>
+          <div className="divider-body" />
           <section className="row-container">
-          <h3 className='title-completed'>TIME WORKED: {this.msToTime(sumHours)}</h3>
+          <div className="title-container">
+            <h3 className="title-completed">Done Tasks </h3>
+            <div className="hours">Time Worked: {this.msToTime(sumHours)}</div>
+          </div>         
             <div className='row row-box'>
               {completedTasks.map(item => {
               return <TasksDisp 

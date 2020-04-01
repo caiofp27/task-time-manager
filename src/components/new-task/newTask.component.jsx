@@ -14,29 +14,23 @@ class NewItem extends React.Component {
 
   handleClick = e => {
     e.preventDefault();
-    if(this.state.newTaskText === ""){
-      alert("You need a task first!");
-    }else{
-      this.props.addTaskFunc(this.state.newTaskText);
-      this.setState({
-       newTaskText: "" 
-      });
-    }
+    this.props.addTaskFunc(this.state.newTaskText);
   }
 
   render() {
-    return (
+    return(
       <section className="container">
-        <form className="form-inline justify-content-center">
+        <form className="form-inline justify-content-center" onSubmit={this.handleClick}>
           <input 
             type="text" 
             className="col-6 form-control mr-2" 
-            placeholder="NEW TASK"
+            placeholder="new task"
             value={this.state.newTaskText}
             onChange={this.updateTaskText}
             maxLength="70"
+            required
           />
-          <button className="btn btn-sm btn-primary button-custom" onClick={this.handleClick}>
+          <button className="btn btn-sm button-custom" type="submit">
             ADD
           </button>
         </form>
