@@ -10,10 +10,10 @@
 
 .title-background {
   width: 300px;
-  height: 100px;
+  height: 130px;
   background-color: white;
   padding: 20px;
-  border-radius: 5px;
+  border-radius: 8px;
 }
 
 .title {
@@ -80,7 +80,7 @@
 
   .title-background {
     width: 200px;
-    height: 70px;
+    height: 100px;
   }
 
   .form-control, p {

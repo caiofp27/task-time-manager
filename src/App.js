@@ -150,7 +150,7 @@ class App extends React.Component {
       <section>
         <div className="header-background">
           <div className="title-background">
-            <h1 className="title">Todo List</h1>
+            <h1 className="title">Task & Time Manager</h1>
           </div>
         </div>
         <div className="container">

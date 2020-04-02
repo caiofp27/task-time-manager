@@ -4,7 +4,7 @@ It's the Front-End of the APP where users can manage their time spent with diffe
 
 Hosted Link:[http://caiofp27.github.io/task-time-manager](http://caiofp27.github.io/task-time-manager).
 
-Back-End: [https://github.com/caiofp27/backend-task-time-manager](https://github.com/caiofp27/backend-task-time-manager).
+Back-End (Not implemented yet): [https://github.com/caiofp27/backend-task-time-manager](https://github.com/caiofp27/backend-task-time-manager).
 
 Technologies used:
 - ReactJS;
@@ -20,7 +20,8 @@ Here it's possible:
 - Edit active tasks;
 - Undo done tasks;
 - Delete;
-- Start and stop the timer of each task.
+- Start and stop the timer of each task;
+- See the total time spent on all done tasks.
 
 
 ## If you want to fork
