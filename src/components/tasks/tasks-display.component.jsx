@@ -60,7 +60,7 @@ class TasksDisp extends React.Component {
           }
           <p className='time'>{time}</p>
           {iconsStartPause}{iconEdit}
-          <i className="fas fa-trash-alt trash-icon" onClick={this.handleDelete} />
+          <i className="fas fa-trash-alt trash-icon" onClick={e => {window.confirm("Are you sure you wish to delete this item?") && this.handleDelete(e)}} />
         </div>
       </div>
     );
