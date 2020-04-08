@@ -4,7 +4,7 @@ It's the Front-End of the APP where users can manage their time spent with diffe
 
 Hosted Link: [http://caiofp27.github.io/task-time-manager](http://caiofp27.github.io/task-time-manager).
 
-Back-End (Not implemented yet): [https://github.com/caiofp27/backend-task-time-manager](https://github.com/caiofp27/backend-task-time-manager).
+The tasks are set up to be saved locally.
 
 Technologies used:
 - ReactJS;

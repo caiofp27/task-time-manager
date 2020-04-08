@@ -8,19 +8,25 @@ class App extends React.Component {
   userData;
   state = {
     tasks: [],
-    incrementer: [
-      {id: null, func: null}
-    ]
+    incrementer: []
   }
 
   componentDidMount() {
-    if(localStorage.getItem('tasks')) {
+    const tasks = localStorage.getItem('tasks');
+    const incrementer = localStorage.getItem('incrementer');
+    if(tasks || incrementer) {
       this.setState({
-        tasks: JSON.parse(localStorage.getItem('tasks'))
-      })
-    } 
+        tasks: JSON.parse(tasks),
+        incrementer: JSON.parse(incrementer)
+      });
+    } else {
+      this.setState({
+        tasks: [],
+        incrementer: []
+      });
+    }
   }
- 
+
   addTask = (taskText) => {
     let date = new Date();
     let timeMs = date.getTime();
@@ -45,9 +51,14 @@ class App extends React.Component {
     const filterTask = this.state.tasks.filter(task => {
       return task.id !== id;
     });
+    const filterIncrement = this.state.incrementer.filter(task => {
+      return task.id !== id;
+    })
     this.setState({
-      tasks: filterTask
+      tasks: filterTask,
+      incrementer: filterIncrement
     });
+    localStorage.setItem('incrementer', JSON.stringify(filterIncrement));
     localStorage.setItem('tasks', JSON.stringify(filterTask));
   }
 
@@ -70,6 +81,7 @@ class App extends React.Component {
       tasks: checkTask,
       incrementer: incrementerCopy
     });
+    localStorage.setItem('incrementer', JSON.stringify(incrementerCopy))
     localStorage.setItem('tasks', JSON.stringify(checkTask));
   }
 
@@ -98,16 +110,18 @@ class App extends React.Component {
           } 
             return task;
           });
+          localStorage.setItem('tasks', JSON.stringify(running));
           this.setState({
             tasks: running
           });  
       },1000)
-    };
+    }
     const incrementerCopy = this.state.incrementer.slice();
     incrementerCopy.push(incrementer);
     this.setState({
       incrementer: incrementerCopy
     });
+    localStorage.setItem('incrementer', JSON.stringify(incrementerCopy));
   }
 
   handlePauseTimer = id => {
@@ -128,6 +142,8 @@ class App extends React.Component {
       tasks: pause,
       incrementer: incrementerCopy
     });
+    localStorage.setItem('tasks', JSON.stringify(pause));
+
   }
 
   editTask = (id, taskText) => {
