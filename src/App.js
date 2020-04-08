@@ -5,17 +5,22 @@ import './App.css';
 import { v4 as uuidv4 } from 'uuid';
 
 class App extends React.Component {
+  userData;
   state = {
-    tasks: [
-      {id: uuidv4(), taskText: "Make dinner", completed: true, isOn: false, startedDate: "2020-03-27T16:13:31.682Z", startedDateMs: 1585325700968, timeTotal: 100000},
-      {id: uuidv4(), taskText: "Walk the dog", completed: true, isOn: false, startedDate: "2020-01-27T16:13:31.682Z", startedDateMs: 1585325700910, timeTotal: 3112000},
-      {id: uuidv4(), taskText: "Do the dishes", completed: false, isOn: false, startedDate: "2020-03-27T16:13:31.682Z",   startedDateMs: 1585325700968, timeTotal: 1215412}
-    ],
+    tasks: [],
     incrementer: [
       {id: null, func: null}
     ]
   }
 
+  componentDidMount() {
+    if(localStorage.getItem('tasks')) {
+      this.setState({
+        tasks: JSON.parse(localStorage.getItem('tasks'))
+      })
+    } 
+  }
+ 
   addTask = (taskText) => {
     let date = new Date();
     let timeMs = date.getTime();
@@ -33,6 +38,7 @@ class App extends React.Component {
     this.setState({
       tasks: taskCopy
     });
+    localStorage.setItem('tasks', JSON.stringify(taskCopy));
   }
 
   deleteTask = id => {
@@ -42,7 +48,9 @@ class App extends React.Component {
     this.setState({
       tasks: filterTask
     });
+    localStorage.setItem('tasks', JSON.stringify(filterTask));
   }
+
   checkTask = id => {
     const incrementerCopy = this.state.incrementer.filter(item => item.id !== id);
     this.state.incrementer.map(item => {
@@ -50,7 +58,7 @@ class App extends React.Component {
         clearInterval(item.func);
       }
       return item;
-    })
+    });
     const checkTask = this.state.tasks.map(task => {
       if(task.id === id){
         task.completed = true;
@@ -62,7 +70,9 @@ class App extends React.Component {
       tasks: checkTask,
       incrementer: incrementerCopy
     });
+    localStorage.setItem('tasks', JSON.stringify(checkTask));
   }
+
   undoTask = id => {
     const undoTask = this.state.tasks.map(task => {
       if(task.id === id){
@@ -74,6 +84,7 @@ class App extends React.Component {
     this.setState({
       tasks: undoTask
     });
+    localStorage.setItem('tasks', JSON.stringify(undoTask));
   }
 
   handleStartTimer = id => {
@@ -96,7 +107,7 @@ class App extends React.Component {
     incrementerCopy.push(incrementer);
     this.setState({
       incrementer: incrementerCopy
-    })
+    });
   }
 
   handlePauseTimer = id => {
@@ -106,7 +117,7 @@ class App extends React.Component {
         clearInterval(item.func);
       }
       return item;
-    })
+    });
     const pause = this.state.tasks.map(task => {
       if(task.id === id) {
         task.isOn = false;
@@ -128,7 +139,8 @@ class App extends React.Component {
     });
     this.setState({
       tasks: taskCopy
-    })
+    });
+    localStorage.setItem('tasks', JSON.stringify(taskCopy));
   }
 
   msToTime = duration => {
